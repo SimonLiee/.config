@@ -99,7 +99,7 @@ now(function() require('mini.notify').setup() end)
 -- - `<Leader>sn` - start new session
 -- - `<Leader>sr` - read previously started session
 -- - `<Leader>sd` - delete previously started session
--- now(function() require('mini.sessions').setup() end)
+now(function() require('mini.sessions').setup() end)
 
 -- Start screen. This is what is shown when you open Neovim like `nvim`.
 -- Example usage:

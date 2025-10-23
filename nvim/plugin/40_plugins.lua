@@ -36,7 +36,9 @@ now_if_args(function()
     -- Use `main` branch since `master` branch is frozen, yet still default
     checkout = 'main',
     -- Update tree-sitter parser after plugin is updated
-    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
+    hooks = {
+      post_checkout = function() vim.cmd('TSUpdate') end,
+    },
   })
   add({
     source = 'nvim-treesitter/nvim-treesitter-textobjects',
@@ -153,9 +155,8 @@ later(function() add('rafamadriz/friendly-snippets') end)
 --   require('mason').setup()
 -- end)
 
-add({ source = "catppuccin/nvim", name = "catppuccin" })
+add({ source = 'catppuccin/nvim', name = 'catppuccin' })
 now(function() vim.cmd('colorscheme catppuccin-mocha') end)
-
 
 -- Autoclose html and tsx tags
 later(function()
@@ -168,16 +169,14 @@ now(function()
   add('rmagatti/auto-session')
   require('auto-session').setup({
     pre_save_cmds = {
-    function(session_name)
-      -- only prompt if this session file doesn’t exist
-      if vim.fn.filereadable(session_name) == 0 then
-        local choice = vim.fn.confirm("No session found for cwd. Create one?", "&Yes\n&No")
-        if choice ~= 1 then
-          return false
+      function(session_name)
+        -- only prompt if this session file doesn’t exist
+        if vim.fn.filereadable(session_name) == 0 then
+          local choice =
+            vim.fn.confirm('No session found for cwd. Create one?', '&Yes\n&No')
+          if choice ~= 1 then return false end
         end
-      end
-    end,
-  },
+      end,
+    },
   })
 end)
-
