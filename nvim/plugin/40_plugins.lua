@@ -168,15 +168,16 @@ end)
 now(function()
   add('rmagatti/auto-session')
   require('auto-session').setup({
-    pre_save_cmds = {
-      function(session_name)
-        -- only prompt if this session file doesn’t exist
-        if vim.fn.filereadable(session_name) == 0 then
-          local choice =
-            vim.fn.confirm('No session found for cwd. Create one?', '&Yes\n&No')
-          if choice ~= 1 then return false end
-        end
-      end,
-    },
+    auto_restore = true,
+    auto_save = true,
+    auto_create = function()
+      -- Ask user to save session if not currently in one
+      local session = require('auto-session.lib').current_session_name()
+      if session and session ~= '' then return true end
+
+      local choice =
+        vim.fn.confirm('Create a new session for this project?', '&Yes\n&No', 1)
+      return choice == 1
+    end,
   })
 end)
