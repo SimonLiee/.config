@@ -1,44 +1,11 @@
 -- ┌────────────────────┐
 -- │ MINI configuration │
 -- └────────────────────┘
---
--- This file contains configuration of the MINI parts of the config.
--- It contains only configs for the 'mini.nvim' plugin (installed in 'init.lua').
---
--- 'mini.nvim' is a library of modules. Each is enabled independently via
--- `require('mini.xxx').setup()` convention. It creates all intended side effects:
--- mappings, autocommands, highlight groups, etc. It also creates a global
--- `MiniXxx` table that can be later used to access module's features.
---
--- Every module's `setup()` function accepts an optional `config` table to
--- adjust its behavior. See the structure of this table at `:h MiniXxx.config`.
---
--- See `:h mini.nvim-general-principles` for more general principles.
---
--- Here each module's `setup()` has a brief explanation of what the module is for,
--- its usage examples (uses Leader mappings from 'plugin/20_keymaps.lua'), and
--- possible directions for more info.
--- For more info about a module see its help page (`:h mini.xxx` for 'mini.xxx').
 
 -- To minimize the time until first screen draw, modules are enabled in two steps:
 -- - Step one enables everything that is needed for first draw with `now()`.
 -- - Everything else is delayed until the first draw with `later()`.
 local now, later = MiniDeps.now, MiniDeps.later
-
--- Step one ===================================================================
--- Enable 'miniwinter' color scheme. It comes with 'mini.nvim' and uses 'mini.hues'.
---
--- See also:
--- - `:h mini.nvim-color-schemes` - list of other color schemes
--- - `:h MiniHues-examples` - how to define highlighting with 'mini.hues'
--- - 'plugin/40_plugins.lua' honorable mentions - other good color schemes
-now(function() vim.cmd('colorscheme miniwinter') end)
-
--- You can try these other 'mini.hues'-based color schemes (uncomment with `gcc`):
--- now(function() vim.cmd('colorscheme minispring') end)
--- now(function() vim.cmd('colorscheme minisummer') end)
--- now(function() vim.cmd('colorscheme miniautumn') end)
--- now(function() vim.cmd('colorscheme randomhue') end)
 
 -- Common configuration presets. Example usage:
 -- - `<C-s>` in Insert mode - save and go to Normal mode
@@ -94,24 +61,6 @@ end)
 -- - `:h MiniNotify.config` for some of common configuration examples.
 now(function() require('mini.notify').setup() end)
 
--- Session management. A thin wrapper around `:h mksession` that consistently
--- manages session files. Example usage:
--- - `<Leader>sn` - start new session
--- - `<Leader>sr` - read previously started session
--- - `<Leader>sd` - delete previously started session
-now(function() require('mini.sessions').setup() end)
-
--- Start screen. This is what is shown when you open Neovim like `nvim`.
--- Example usage:
--- - Type prefix keys to limit available candidates
--- - Navigate down/up with `<C-n>` and `<C-p>`
--- - Press `<CR>` to select an entry
---
--- See also:
--- - `:h MiniStarter-example-config` - non-default config examples
--- - `:h MiniStarter-lifecycle` - how to work with Starter buffer
--- now(function() require('mini.starter').setup() end)
-
 -- Statusline. Sets `:h 'statusline'` to show more info in a line below window.
 -- Example usage:
 -- - Left most section indicates current mode (text + highlighting).
@@ -128,8 +77,6 @@ now(function() require('mini.statusline').setup() end)
 -- Tabline. Sets `:h 'tabline'` to show all listed buffers in a line at the top.
 -- Buffers are ordered as they were created. Navigate with `[b` and `]b`.
 now(function() require('mini.tabline').setup() end)
-
--- Step two ===================================================================
 
 -- Extra 'mini.nvim' functionality.
 --
@@ -190,15 +137,6 @@ end)
 -- - `:h MiniAlign.gen_step` - list of support step customizations
 -- - `:h MiniAlign-algorithm` - how alignment is done on algorithmic level
 later(function() require('mini.align').setup() end)
-
--- Animate common Neovim actions. Like cursor movement, scroll, window resize,
--- window open, window close. Animations are done based on Neovim events and
--- don't require custom mappings.
---
--- It is not enabled by default because its effects are a matter of taste.
--- Also scroll and resize have some unwanted side effects (see `:h mini.animate`).
--- Uncomment next line (use `gcc`) to enable.
--- later(function() require('mini.animate').setup() end)
 
 -- Go forward/backward with square brackets. Implements consistent sets of mappings
 -- for selected targets (like buffers, diagnostic, quickfix list entries, etc.).
@@ -266,37 +204,23 @@ later(function()
       { mode = 'n', keys = ']' },
       { mode = 'x', keys = '[' },
       { mode = 'x', keys = ']' },
-      { mode = 'i', keys = '<C-x>' },    -- Built-in completion
-      { mode = 'n', keys = 'g' },        -- `g` key
+      { mode = 'i', keys = '<C-x>' }, -- Built-in completion
+      { mode = 'n', keys = 'g' },     -- `g` key
       { mode = 'x', keys = 'g' },
-      { mode = 'n', keys = "'" },        -- Marks
+      { mode = 'n', keys = "'" },     -- Marks
       { mode = 'n', keys = '`' },
       { mode = 'x', keys = "'" },
       { mode = 'x', keys = '`' },
-      { mode = 'n', keys = '"' },        -- Registers
+      { mode = 'n', keys = '"' }, -- Registers
       { mode = 'x', keys = '"' },
       { mode = 'i', keys = '<C-r>' },
       { mode = 'c', keys = '<C-r>' },
-      { mode = 'n', keys = '<C-w>' },    -- Window commands
-      { mode = 'n', keys = 'z' },        -- `z` key
+      { mode = 'n', keys = '<C-w>' }, -- Window commands
+      { mode = 'n', keys = 'z' },     -- `z` key
       { mode = 'x', keys = 'z' },
     },
   })
 end)
-
--- Tweak and save any color scheme. Contains utility functions to work with
--- color spaces and color schemes. Example usage:
--- - `:Colorscheme default` - switch with animation to the default color scheme
---
--- See also:
--- - `:h MiniColors.interactive()` - interactively tweak color scheme
--- - `:h MiniColors-recipes` - common recipes to use during interactive tweaking
--- - `:h MiniColors.convert()` - convert between color spaces
--- - `:h MiniColors-color-spaces` - list of supported color sapces
---
--- It is not enabled by default because it is not really needed on a daily basis.
--- Uncomment next line (use `gcc`) to enable.
--- later(function() require('mini.colors').setup() end)
 
 -- Comment lines. Provides functionality to work with commented lines.
 -- Uses `:h 'commentstring'` option to infer comment structure.
@@ -367,10 +291,7 @@ end)
 
 -- Autohighlight word under cursor with a customizable delay.
 -- Word boundaries are defined based on `:h 'iskeyword'` option.
---
--- It is not enabled by default because its effects are a matter of taste.
--- Uncomment next line (use `gcc`) to enable.
--- later(function() require('mini.cursorword').setup() end)
+later(function() require('mini.cursorword').setup({ delay = 0, }) end)
 
 -- Work with diff hunks that represent the difference between the buffer text and
 -- some reference text set by a source. Default source uses text from Git index.
@@ -564,9 +485,9 @@ later(function()
   -- Map built-in navigation characters to force map refresh
   for _, key in ipairs({ 'n', 'N', '*', '#' }) do
     local rhs = key
-      -- Also open enough folds when jumping to the next match
-      .. 'zv'
-      .. '<Cmd>lua MiniMap.refresh({}, { lines = false, scrollbar = false })<CR>'
+        -- Also open enough folds when jumping to the next match
+        .. 'zv'
+        .. '<Cmd>lua MiniMap.refresh({}, { lines = false, scrollbar = false })<CR>'
     vim.keymap.set('n', key, rhs)
   end
 end)
