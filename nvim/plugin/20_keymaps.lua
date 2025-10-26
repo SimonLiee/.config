@@ -1,29 +1,25 @@
 -- ┌─────────────────┐
 -- │ Custom mappings │
 -- └─────────────────┘
---
--- This file contains definitions of custom general and Leader mappings.
 
--- General mappings ===========================================================
+-- Mapper Functions ===========================================================
 
--- Use this section to add custom general mappings. See `:h vim.keymap.set()`.
-
--- An example helper to create a Normal mode mapping
 local nmap = function(lhs, rhs, desc)
   -- See `:h vim.keymap.set()`
   vim.keymap.set('n', lhs, rhs, { desc = desc })
 end
+local nmap_leader = function(suffix, rhs, desc)
+  vim.keymap.set('n', '<Leader>' .. suffix, rhs, { desc = desc })
+end
+local xmap_leader = function(suffix, rhs, desc)
+  vim.keymap.set('x', '<Leader>' .. suffix, rhs, { desc = desc })
+end
 
--- Paste linewise before/after current line
--- Usage: `yiw` to yank a word and `]p` to put it on the next line.
-nmap('[p', '<Cmd>exe "put! " . v:register<CR>', 'Paste Above')
-nmap(']p', '<Cmd>exe "put "  . v:register<CR>', 'Paste Below')
+-- General mappings ===========================================================
 
--- Many general mappings are created by 'mini.basics'. See 'plugin/30_mini.lua'
-
--- stylua: ignore start
--- The next part (until `-- stylua: ignore end`) is aligned manually for easier
--- reading. Consider preserving this or remove `-- stylua` lines to autoformat.
+vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Exit insert mode' })
+vim.keymap.set('t', 'jj', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
+nmap_leader('<Leader>', ':w<CR>', 'Save')
 
 -- Leader mappings ============================================================
 
@@ -70,12 +66,6 @@ _G.Config.leader_group_clues = {
 -- an attempt to be more concise yet descriptive. See `:h <Cmd>`.
 -- This approach also doesn't require the underlying commands/functions to exist
 -- during mapping creation: a "lazy loading" approach to improve startup time.
-local nmap_leader = function(suffix, rhs, desc)
-  vim.keymap.set('n', '<Leader>' .. suffix, rhs, { desc = desc })
-end
-local xmap_leader = function(suffix, rhs, desc)
-  vim.keymap.set('x', '<Leader>' .. suffix, rhs, { desc = desc })
-end
 
 -- b is for 'Buffer'. Common usage:
 -- - `<Leader>bs` - create scratch (temporary) buffer

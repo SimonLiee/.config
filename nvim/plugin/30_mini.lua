@@ -198,7 +198,7 @@ later(function() require('mini.align').setup() end)
 -- It is not enabled by default because its effects are a matter of taste.
 -- Also scroll and resize have some unwanted side effects (see `:h mini.animate`).
 -- Uncomment next line (use `gcc`) to enable.
-later(function() require('mini.animate').setup() end)
+-- later(function() require('mini.animate').setup() end)
 
 -- Go forward/backward with square brackets. Implements consistent sets of mappings
 -- for selected targets (like buffers, diagnostic, quickfix list entries, etc.).
@@ -500,7 +500,19 @@ later(function() require('mini.jump').setup() end)
 --
 -- See also:
 -- - `:h MiniJump2d.gen_spotter` - list of available spotters
-later(function() require('mini.jump2d').setup() end)
+later(
+  function()
+    require('mini.jump2d').setup({
+      spotter = require('mini.jump2d').builtin_opts.word_start.spotter,
+      view = {
+        n_steps_ahead = 2,
+      },
+      allowed_lines = {
+        blank = false,
+      },
+    })
+  end
+)
 
 -- Special key mappings. Provides helpers to map:
 -- - Multi-step actions. Apply action 1 if condition is met; else apply
