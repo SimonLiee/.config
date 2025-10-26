@@ -19,3 +19,5 @@ alias gcm='git commit -m'
 alias gf='git fetch'
 alias gl='git pull'
 alias gp='git push'
+
+alias e='exit'
