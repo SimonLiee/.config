@@ -8,6 +8,7 @@
 --
 -- Use this file to install and configure other such plugins.
 
+-- Helper Functions ================================================================
 -- Make concise helpers for installing/adding plugins in two stages.
 -- Add some plugins now if Neovim is started like `nvim -- some-file` because
 -- they are needed during startup to work correctly.
@@ -15,21 +16,6 @@ local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 local now_if_args = vim.fn.argc(-1) > 0 and now or later
 
 -- Tree-sitter ================================================================
-
--- Tree-sitter is a tool for fast incremental parsing. It converts text into
--- a hierarchical structure (called tree) that can be used to implement advanced
--- and/or more precise actions: syntax highlighting, textobjects, indent, etc.
---
--- Tree-sitter support is built into Neovim (see `:h treesitter`). However, it
--- requires two extra pieces that don't come with Neovim directly:
--- - Language parsers: programs that convert text into trees. Some are built-in
---   (like for Lua), 'nvim-treesitter' provides many others.
--- - Query files: definitions of how to extract information from trees in
---   a useful manner (see `:h treesitter-query`). 'nvim-treesitter' also provides
---   these, while 'nvim-treesitter-textobjects' provides the ones for Neovim
---   textobjects (see `:h text-objects`, `:h MiniAi.gen_spec.treesitter()`).
---
--- Add these plugins now if file (and not 'mini.starter') is shown after startup.
 now_if_args(function()
   add({
     source = 'nvim-treesitter/nvim-treesitter',
@@ -48,11 +34,8 @@ now_if_args(function()
 
   -- Ensure installed parsers for listed languages. Add to `languages`
   -- array languages which you want to have installed. To see available languages:
-  -- - Execute `:=require('nvim-treesitter').get_available()`
-  -- - Visit
   --   https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
-  local ensure_languages = {
-    -- These are already installed. Used as an example.
+  local languages = {
     'lua',
     'vimdoc',
     'typescript',
@@ -63,15 +46,16 @@ now_if_args(function()
     'css',
     'markdown',
   }
+
   local isnt_installed = function(lang)
     return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
   end
-  local to_install = vim.tbl_filter(isnt_installed, ensure_languages)
+  local to_install = vim.tbl_filter(isnt_installed, languages)
   if #to_install > 0 then require('nvim-treesitter').install(to_install) end
 
   -- Ensure tree-sitter enabled after opening a file for target language
   local filetypes = {}
-  for _, lang in ipairs(ensure_languages) do
+  for _, lang in ipairs(languages) do
     for _, ft in ipairs(vim.treesitter.language.get_filetypes(lang)) do
       table.insert(filetypes, ft)
     end
@@ -82,19 +66,6 @@ end)
 
 -- Language servers ===========================================================
 
--- Language Server Protocol (LSP) is a set of conventions that power creation of
--- language specific tools. It requires two parts:
--- - Server - program that performs language specific computations.
--- - Client - program that asks server for computations and shows results.
---
--- Here Neovim itself is a client (see `:h vim.lsp`). Language servers need to
--- be installed separately based on your OS, CLI tools, and preferences.
--- See note about 'mason.nvim' at the bottom of the file.
---
--- Neovim's team collects commonly used configurations for most language servers
--- inside 'neovim/nvim-lspconfig' plugin.
---
--- Add it now if file (and not 'mini.starter') is shown after startup.
 now_if_args(function()
   add('neovim/nvim-lspconfig')
 
@@ -122,7 +93,7 @@ later(function()
   require('conform').setup({
     -- Map of filetype to formatters
     -- Make sure that necessary CLI tool is available
-    -- formatters_by_ft = { lua = { 'stylua' } },
+    formatters_by_ft = { lua = { 'stylua' } },
   })
 end)
 
