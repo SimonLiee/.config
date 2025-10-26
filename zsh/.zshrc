@@ -13,7 +13,7 @@ alias la='ls -A'
 
 alias g='git'
 alias ga='git add'
-alias gcm='git commit -m'
+alias gm='git commit -m'
 alias gf='git fetch'
 alias gpl='git pull'
 alias gp='git push'
