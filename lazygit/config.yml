@@ -2,3 +2,4 @@ gui:
   showBottomLine: false
   showIcons: true
   nerdFontsVersion: "3"
+  showFileTree: false
