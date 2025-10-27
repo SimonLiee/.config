@@ -1,0 +1,9 @@
+window-padding-x = 0
+window-padding-y = 0
+
+font-size = 22
+background-opacity = 0.9
+window-save-state = always
+macos-option-as-alt = true
+theme = Catppuccin Mocha
+mouse-hide-while-typing = true
