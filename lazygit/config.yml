@@ -1,3 +1,4 @@
 gui:
   showBottomLine: false
   showIcons: true
+  nerdFontsVersion: "3"
