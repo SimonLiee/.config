@@ -149,3 +149,22 @@ now(function()
     end,
   })
 end)
+
+-- ToggleTerm
+later(function()
+  add('akinsho/toggleterm.nvim')
+  require('toggleterm').setup({ open_mapping = [[<c-t>]] })
+
+  local Terminal = require('toggleterm.terminal').Terminal
+  local lazygit =
+    Terminal:new({ cmd = 'lazygit', hidden = true, direction = 'float' })
+
+  function _lazygit_toggle() lazygit:toggle() end
+
+  vim.api.nvim_set_keymap(
+    'n',
+    '<leader>gt',
+    '<cmd>lua _lazygit_toggle()<CR>',
+    { noremap = true, silent = true, desc = 'Open LazyGit' }
+  )
+end)
