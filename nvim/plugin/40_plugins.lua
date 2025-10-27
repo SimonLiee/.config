@@ -157,7 +157,7 @@ later(function()
 
   local Terminal = require('toggleterm.terminal').Terminal
   local lazygit = Terminal:new({
-    cmd = 'lazygit -ucf ~/.config/lazygit/config.yml',
+    cmd = 'lazygit',
     hidden = true,
     direction = 'float',
     float_opts = {
