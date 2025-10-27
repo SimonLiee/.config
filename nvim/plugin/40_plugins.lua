@@ -156,8 +156,16 @@ later(function()
   require('toggleterm').setup({ open_mapping = [[<c-t>]] })
 
   local Terminal = require('toggleterm.terminal').Terminal
-  local lazygit =
-    Terminal:new({ cmd = 'lazygit', hidden = true, direction = 'float' })
+  local lazygit = Terminal:new({
+    cmd = 'lazygit',
+    hidden = true,
+    direction = 'float',
+    float_opts = {
+      border = 'curved',
+      width = function() return math.floor(vim.o.columns * 0.85) end,
+      height = function() return math.floor(vim.o.lines * 0.85) end,
+    },
+  })
 
   function _lazygit_toggle() lazygit:toggle() end
 
