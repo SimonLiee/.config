@@ -18,6 +18,7 @@ end
 -- General mappings ===========================================================
 
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode' })
+vim.keymap.set('t', 'jk', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
 nmap_leader('<Leader>', ':w<CR>', 'Save')
 
 -- Leader mappings ============================================================

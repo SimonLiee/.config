@@ -160,6 +160,11 @@ later(function()
     cmd = 'lazygit',
     hidden = true,
     direction = 'float',
+    on_open = function(term) vim.keymap.del('t', 'jk') end,
+    on_close = function(term)
+      vim.keymap.set('t', 'jk', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
+    end,
+
     float_opts = {
       border = 'curved',
       width = function() return math.floor(vim.o.columns * 0.85) end,
