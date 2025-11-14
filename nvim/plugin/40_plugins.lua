@@ -16,7 +16,7 @@ local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 local now_if_args = vim.fn.argc(-1) > 0 and now or later
 
 -- Tree-sitter ================================================================
-now_if_args(function()
+now(function()
   add({
     source = 'nvim-treesitter/nvim-treesitter',
     -- Use `main` branch since `master` branch is frozen, yet still default
@@ -45,6 +45,10 @@ now_if_args(function()
     'html',
     'css',
     'markdown',
+    'go',
+    'gomod',
+    'gowork',
+    'gosum',
   }
 
   local isnt_installed = function(lang)
@@ -72,6 +76,7 @@ now_if_args(function()
   vim.lsp.enable({
     'ts_ls',
     'lua_ls',
+    'gopls',
   })
 end)
 
