@@ -291,7 +291,7 @@ end)
 
 -- Autohighlight word under cursor with a customizable delay.
 -- Word boundaries are defined based on `:h 'iskeyword'` option.
-later(function() require('mini.cursorword').setup({ delay = 0, }) end)
+later(function() require('mini.cursorword').setup({ delay = 0 }) end)
 
 -- Work with diff hunks that represent the difference between the buffer text and
 -- some reference text set by a source. Default source uses text from Git index.
@@ -485,9 +485,9 @@ later(function()
   -- Map built-in navigation characters to force map refresh
   for _, key in ipairs({ 'n', 'N', '*', '#' }) do
     local rhs = key
-        -- Also open enough folds when jumping to the next match
-        .. 'zv'
-        .. '<Cmd>lua MiniMap.refresh({}, { lines = false, scrollbar = false })<CR>'
+      -- Also open enough folds when jumping to the next match
+      .. 'zv'
+      .. '<Cmd>lua MiniMap.refresh({}, { lines = false, scrollbar = false })<CR>'
     vim.keymap.set('n', key, rhs)
   end
 end)
@@ -598,7 +598,16 @@ end)
 -- - `:h MiniPick.builtin` and `:h MiniExtra.pickers` - available pickers;
 --   Execute one either with Lua function, `:Pick <picker-name>` command, or
 --   one of `<Leader>f` mappings defined in 'plugin/20_keymaps.lua'
-later(function() require('mini.pick').setup() end)
+later(
+  function()
+    require('mini.pick').setup({
+      mappings = {
+        move_down = '<C-j>',
+        move_up = '<C-k>',
+      },
+    })
+  end
+)
 
 -- Split and join arguments (regions inside brackets between allowed separators).
 -- It uses Lua patterns to find arguments, which means it works in comments and
