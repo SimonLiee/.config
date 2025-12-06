@@ -468,7 +468,7 @@ later(function()
   -- searches up the file tree until the first root marker ('.git' or 'Makefile')
   -- and sets their parent directory as a current directory.
   -- This is helpful when simultaneously dealing with files from several projects.
-  MiniMisc.setup_auto_root()
+  -- MiniMisc.setup_auto_root()
 
   -- Restore latest cursor position on file open
   MiniMisc.setup_restore_cursor()
@@ -505,7 +505,14 @@ later(function() require('mini.move').setup() end)
 -- - `:h MiniOperators-mappings` - overview of how mappings are created
 -- - `:h MiniOperators-overview` - overview of present operators
 later(function()
-  require('mini.operators').setup()
+  require('mini.operators').setup({
+    evaluate = {
+      prefix = '',
+    },
+    sort = {
+      prefix = '',
+    },
+  })
 
   -- Create mappings for swapping adjacent arguments. Notes:
   -- - Relies on `a` argument textobject from 'mini.ai'.
@@ -598,17 +605,3 @@ later(function() require('mini.surround').setup() end)
 -- to reduce noise when typing. Example usage:
 -- - `<Leader>ot` - trim all trailing whitespace in a buffer
 later(function() require('mini.trailspace').setup() end)
-
--- Track and reuse file system visits. Every file/directory visit is persistently
--- tracked on disk to later reuse: show in special frecency order, etc. It also
--- supports adding labels to visited paths to quickly navigate between them.
--- Example usage:
--- - `<Leader>fv` - find across all visits
--- - `<Leader>vv` / `<Leader>vV` - add/remove special "core" label to current file
--- - `<Leader>vc` / `<Leader>vC` - show files with "core" label; all or added within
---   current working directory
---
--- See also:
--- - `:h MiniVisits-overview` - overview of how module works
--- - `:h MiniVisits-examples` - examples of common setups
-later(function() require('mini.visits').setup() end)
