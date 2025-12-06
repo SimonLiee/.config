@@ -146,6 +146,15 @@ later(function()
   require('nvim-ts-autotag').setup()
 end)
 
+later(function()
+  -- Create pairs not only in Insert, but also in Command line mode
+  -- require('mini.pairs').setup({ modes = { command = true } })
+  add('windwp/nvim-autopairs')
+  require('nvim-autopairs').setup({
+    ignored_next_char = '[%w%.]', -- will ignore alphanumeric and `.` symbol
+  })
+end)
+
 -- Auto create, read and save session for cwd and git branch
 now(function()
   add('rmagatti/auto-session')
