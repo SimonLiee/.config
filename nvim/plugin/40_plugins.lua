@@ -99,7 +99,16 @@ later(function()
     -- Map of filetype to formatters
     -- Make sure that necessary CLI tool is available
     formatters_by_ft = { lua = { 'stylua' } },
+    format_on_save = {
+      -- I recommend these options. See :help conform.format for details.
+      lsp_format = 'fallback',
+      timeout_ms = 500,
+    },
   })
+  _G.Config.new_autocmd('BufLeave', nil, function()
+    require('conform').format({ lsp_fallback = true })
+    vim.cmd('silent! write')
+  end, 'Save on buffer leave')
 end)
 
 -- Snippets ===================================================================
