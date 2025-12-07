@@ -151,7 +151,7 @@ later(function()
   -- require('mini.pairs').setup({ modes = { command = true } })
   add('windwp/nvim-autopairs')
   require('nvim-autopairs').setup({
-    ignored_next_char = '[%w%.]', -- will ignore alphanumeric and `.` symbol
+    ignored_next_char = '[^%s\n]', -- will ignore alphanumeric and `.` symbol
   })
 end)
 
