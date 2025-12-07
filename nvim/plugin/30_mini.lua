@@ -605,3 +605,5 @@ later(function() require('mini.surround').setup() end)
 -- to reduce noise when typing. Example usage:
 -- - `<Leader>ot` - trim all trailing whitespace in a buffer
 later(function() require('mini.trailspace').setup() end)
+
+later(function() require('mini.cmdline').setup() end)
