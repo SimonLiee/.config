@@ -114,6 +114,12 @@ later(function()
       -- use tree-sitter. This example makes `aF`/`iF` mean around/inside function
       -- definition (not call). See `:h MiniAi.gen_spec.treesitter()` for details.
       F = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
+      L = ai.gen_spec.treesitter({ a = '@loop.outer', i = '@loop.inner' }),
+      C = ai.gen_spec.treesitter({
+        a = '@conditional.outer',
+        i = '@conditional.inner',
+      }),
+      P = ai.gen_spec.treesitter({ a = '@parameter.outer', i = '@parameter.inner' }),
     },
 
     -- 'mini.ai' by default mostly mimics built-in search behavior: first try
