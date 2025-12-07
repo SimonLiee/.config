@@ -122,21 +122,6 @@ end)
 -- See `:h MiniSnippets.gen_loader.from_lang()`.
 later(function() add('rafamadriz/friendly-snippets') end)
 
--- Honorable mentions =========================================================
-
--- 'mason-org/mason.nvim' (a.k.a. "Mason") is a great tool (package manager) for
--- installing external language servers, formatters, and linters. It provides
--- a unified interface for installing, updating, and deleting such programs.
---
--- The caveat is that these programs will be set up to be mostly used inside Neovim.
--- If you need them to work elsewhere, consider using other package managers.
---
--- You can use it like so:
--- later(function()
---   add('mason-org/mason.nvim')
---   require('mason').setup()
--- end)
-
 add({ source = 'catppuccin/nvim', name = 'catppuccin' })
 now(function() vim.cmd('colorscheme catppuccin-mocha') end)
 
@@ -147,8 +132,6 @@ later(function()
 end)
 
 later(function()
-  -- Create pairs not only in Insert, but also in Command line mode
-  -- require('mini.pairs').setup({ modes = { command = true } })
   add('windwp/nvim-autopairs')
   require('nvim-autopairs').setup({
     ignored_next_char = '[^%s\n]', -- will ignore alphanumeric and `.` symbol
