@@ -147,6 +147,12 @@ nmap_leader('lr', '<Cmd>lua vim.lsp.buf.rename()<CR>', 'Rename')
 nmap_leader('lR', '<Cmd>lua vim.lsp.buf.references()<CR>', 'References')
 nmap_leader('ls', '<Cmd>lua vim.lsp.buf.definition()<CR>', 'Source definition')
 nmap_leader('lt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Type definition')
+vim.keymap.set(
+  'n',
+  'gd',
+  '<Cmd>lua vim.lsp.buf.definition()<CR>',
+  { desc = 'Source definition' }
+)
 
 xmap_leader('lf', formatting_cmd, 'Format selection')
 
