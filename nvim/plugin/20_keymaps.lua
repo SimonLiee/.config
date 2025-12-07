@@ -92,7 +92,6 @@ nmap_leader('eq', explore_quickfix, 'Quickfix')
 -- - `<Leader>fg` - find inside files; requires `ripgrep`
 -- - `<Leader>fh` - find help tag
 -- - `<Leader>fr` - resume latest picker
--- - `<Leader>fv` - all visited paths; requires 'mini.visits'
 --
 -- All these use 'mini.pick'. See `:h MiniPick-overview` for an overview.
 local pick_added_hunks_buf = '<Cmd>Pick git_hunks path="%" scope="staged"<CR>'
@@ -120,8 +119,6 @@ nmap_leader('fp', '<Cmd>Pick projects<CR>', 'Projects')
 nmap_leader('fR', '<Cmd>Pick lsp scope="references"<CR>', 'References (LSP)')
 nmap_leader('fs', '<Cmd>Pick lsp scope="workspace_symbol"<CR>', 'Symbols workspace')
 nmap_leader('fS', '<Cmd>Pick lsp scope="document_symbol"<CR>', 'Symbols document')
-nmap_leader('fv', '<Cmd>Pick visit_paths cwd=""<CR>', 'Visit paths (all)')
-nmap_leader('fV', '<Cmd>Pick visit_paths<CR>', 'Visit paths (cwd)')
 
 nmap_leader('go', '<Cmd>lua MiniDiff.toggle_overlay()<CR>', 'Toggle overlay')
 nmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at cursor')
@@ -156,14 +153,6 @@ vim.keymap.set(
 
 xmap_leader('lf', formatting_cmd, 'Format selection')
 
--- - `<Leader>mt` - toggle map from 'mini.map' (closed by default)
--- - `<Leader>mf` - focus on the map for fast navigation
--- - `<Leader>ms` - change map's side (if it covers something underneath)
-nmap_leader('mf', '<Cmd>lua MiniMap.toggle_focus()<CR>', 'Focus (toggle)')
-nmap_leader('mr', '<Cmd>lua MiniMap.refresh()<CR>', 'Refresh')
-nmap_leader('ms', '<Cmd>lua MiniMap.toggle_side()<CR>', 'Side (toggle)')
-nmap_leader('mt', '<Cmd>lua MiniMap.toggle()<CR>', 'Toggle')
-
 -- o is for 'Other'. Common usage:
 -- - `<Leader>oz` - toggle between "zoomed" and regular view of current buffer
 nmap_leader('or', '<Cmd>lua MiniMisc.resize_window()<CR>', 'Resize to default width')
@@ -177,26 +166,3 @@ nmap_leader('ss', ':AutoSession search<CR>', 'Search')
 -- t is for 'Terminal'
 nmap_leader('tT', '<Cmd>horizontal term<CR>', 'Terminal (horizontal)')
 nmap_leader('tt', '<Cmd>vertical term<CR>', 'Terminal (vertical)')
-
--- v is for 'Visits'. Common usage:
--- - `<Leader>vv` - add    "core" label to current file.
--- - `<Leader>vV` - remove "core" label to current file.
--- - `<Leader>vc` - pick among all files with "core" label.
-local make_pick_core = function(cwd, desc)
-  return function()
-    local sort_latest = MiniVisits.gen_sort.default({ recency_weight = 1 })
-    local local_opts = { cwd = cwd, filter = 'core', sort = sort_latest }
-    MiniExtra.pickers.visit_paths(local_opts, { source = { name = desc } })
-  end
-end
-
-nmap_leader('vc', make_pick_core('', 'Core visits (all)'), 'Core visits (all)')
-nmap_leader('vC', make_pick_core(nil, 'Core visits (cwd)'), 'Core visits (cwd)')
-nmap_leader('vv', '<Cmd>lua MiniVisits.add_label("core")<CR>', 'Add "core" label')
-nmap_leader(
-  'vV',
-  '<Cmd>lua MiniVisits.remove_label("core")<CR>',
-  'Remove "core" label'
-)
-nmap_leader('vl', '<Cmd>lua MiniVisits.add_label()<CR>', 'Add label')
-nmap_leader('vL', '<Cmd>lua MiniVisits.remove_label()<CR>', 'Remove label')
