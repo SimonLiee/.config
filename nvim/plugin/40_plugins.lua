@@ -122,8 +122,10 @@ end)
 -- See `:h MiniSnippets.gen_loader.from_lang()`.
 later(function() add('rafamadriz/friendly-snippets') end)
 
-add({ source = 'catppuccin/nvim', name = 'catppuccin' })
-now(function() vim.cmd('colorscheme catppuccin-mocha') end)
+now(function()
+  add({ source = 'catppuccin/nvim', name = 'catppuccin' })
+  vim.cmd('colorscheme catppuccin-mocha')
+end)
 
 -- Autoclose html and tsx tags
 later(function()
