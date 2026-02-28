@@ -140,38 +140,6 @@ later(function()
   })
 end)
 
--- ToggleTerm
-later(function()
-  add('akinsho/toggleterm.nvim')
-  require('toggleterm').setup({ open_mapping = [[<c-t>]] })
-
-  local Terminal = require('toggleterm.terminal').Terminal
-  local lazygit = Terminal:new({
-    cmd = 'lazygit',
-    hidden = true,
-    direction = 'float',
-    on_open = function(term) vim.keymap.del('t', 'jk') end,
-    on_close = function(term)
-      vim.keymap.set('t', 'jk', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
-    end,
-
-    float_opts = {
-      border = 'curved',
-      width = function() return math.floor(vim.o.columns * 0.85) end,
-      height = function() return math.floor(vim.o.lines * 0.85) end,
-    },
-  })
-
-  function _lazygit_toggle() lazygit:toggle() end
-
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>gt',
-    '<cmd>lua _lazygit_toggle()<CR>',
-    { noremap = true, silent = true, desc = 'Open LazyGit' }
-  )
-end)
-
 -- Nvim-tmux-navigation: Seamless navigation between tmux and neovim
 later(function()
   add('alexghergh/nvim-tmux-navigation')
