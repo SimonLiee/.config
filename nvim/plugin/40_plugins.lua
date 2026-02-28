@@ -140,24 +140,6 @@ later(function()
   })
 end)
 
--- Auto create, read and save session for cwd and git branch
-now(function()
-  add('rmagatti/auto-session')
-  require('auto-session').setup({
-    auto_restore = true,
-    auto_save = true,
-    auto_create = function()
-      -- Ask user to save session if not currently in one
-      local session = require('auto-session.lib').current_session_name()
-      if session and session ~= '' then return true end
-
-      local choice =
-        vim.fn.confirm('Create a new session for this project?', '&Yes\n&No', 1)
-      return choice == 1
-    end,
-  })
-end)
-
 -- ToggleTerm
 later(function()
   add('akinsho/toggleterm.nvim')
