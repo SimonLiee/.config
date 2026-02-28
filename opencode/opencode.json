@@ -7,6 +7,10 @@
     "bash": {
       "*": "ask",
       "git *": "allow",
+      "ls *": "allow",
+      "cd *": "allow",
+      "find *": "allow",
+      "wc *": "allow",
     }
   }
 }
