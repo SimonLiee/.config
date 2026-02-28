@@ -189,3 +189,18 @@ later(function()
     { noremap = true, silent = true, desc = 'Open LazyGit' }
   )
 end)
+
+-- Nvim-tmux-navigation: Seamless navigation between tmux and neovim
+later(function()
+  add('alexghergh/nvim-tmux-navigation')
+  require('nvim-tmux-navigation').setup({
+    keybindings = {
+      left = '<C-h>',
+      down = '<C-j>',
+      up = '<C-k>',
+      right = '<C-l>',
+      last_active = '<C-\\>',
+      next = '<C-Space>',
+    },
+  })
+end)
