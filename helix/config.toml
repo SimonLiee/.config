@@ -1,0 +1,13 @@
+theme = "catppuccin_mocha"
+
+[editor]
+bufferline = "always"
+auto-save = true
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal."space"]
+c = {c = ":buffer-close",o = ":buffer-close-others"}
+
+

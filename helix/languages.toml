@@ -1,0 +1,8 @@
+[language-server.tailwindcss-ls]
+command = "tailwindcss-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "html"
+language-servers = [{ name = "superhtml", except-features = ["format"] }, "tailwindcss-ls", "vscode-html-language-server"]
+auto-format = true
