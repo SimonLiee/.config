@@ -1,71 +1,74 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+  "tmux": {
+    "enabled": true,
+    "layout": "main-vertical",
+    "main_pane_size": 60
+  },
   "agents": {
     "sisyphus": {
-      "model": "opencode/claude-opus-4-6",
+      "model": "anthropic/claude-opus-4-6",
       "variant": "max"
     },
-    "hephaestus": {
-      "model": "opencode/gpt-5.3-codex",
-      "variant": "medium"
-    },
     "oracle": {
-      "model": "opencode/gpt-5.2",
+      "model": "github-copilot/gpt-5.2",
       "variant": "high"
     },
     "librarian": {
-      "model": "opencode/glm-4.7-free"
+      "model": "anthropic/claude-sonnet-4-6"
     },
     "explore": {
-      "model": "opencode/claude-haiku-4-5"
+      "model": "anthropic/claude-haiku-4-5"
     },
     "multimodal-looker": {
-      "model": "opencode/gemini-3-flash"
+      "model": "github-copilot/gemini-3-flash-preview"
     },
     "prometheus": {
-      "model": "opencode/claude-opus-4-6",
+      "model": "anthropic/claude-opus-4-6",
       "variant": "max"
     },
     "metis": {
-      "model": "opencode/claude-opus-4-6",
+      "model": "anthropic/claude-opus-4-6",
       "variant": "max"
     },
     "momus": {
-      "model": "opencode/gpt-5.2",
+      "model": "github-copilot/gpt-5.2",
       "variant": "medium"
     },
     "atlas": {
-      "model": "opencode/kimi-k2.5-free"
+      "model": "anthropic/claude-sonnet-4-6"
     }
   },
   "categories": {
     "visual-engineering": {
-      "model": "opencode/gemini-3.1-pro",
+      "model": "github-copilot/gemini-3.1-pro-preview",
       "variant": "high"
     },
     "ultrabrain": {
-      "model": "opencode/gpt-5.3-codex",
-      "variant": "xhigh"
-    },
-    "deep": {
-      "model": "opencode/gpt-5.3-codex",
-      "variant": "medium"
+      "model": "github-copilot/gemini-3.1-pro-preview",
+      "variant": "high"
     },
     "artistry": {
-      "model": "opencode/gemini-3.1-pro",
+      "model": "github-copilot/gemini-3.1-pro-preview",
       "variant": "high"
     },
     "quick": {
-      "model": "opencode/claude-haiku-4-5"
+      "model": "anthropic/claude-haiku-4-5"
     },
     "unspecified-low": {
-      "model": "opencode/claude-sonnet-4-5"
+      "model": "anthropic/claude-sonnet-4-6"
     },
     "unspecified-high": {
-      "model": "opencode/claude-sonnet-4-5"
+      "model": "anthropic/claude-sonnet-4-6"
     },
     "writing": {
-      "model": "opencode/gemini-3-flash"
+      "model": "github-copilot/gemini-3-flash-preview"
     }
-  }
+  },
+  "_migrations": [
+    "model-version:anthropic/claude-sonnet-4-5->anthropic/claude-sonnet-4-6",
+    "model-version:anthropic/claude-sonnet-4-5->anthropic/claude-sonnet-4-6",
+    "model-version:anthropic/claude-sonnet-4-5->anthropic/claude-sonnet-4-6",
+    "model-version:anthropic/claude-sonnet-4-5->anthropic/claude-sonnet-4-6"
+  ]
 }
