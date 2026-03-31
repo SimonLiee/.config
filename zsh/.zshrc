@@ -8,6 +8,9 @@ PROMPT='%B%F{27}%1~%f%b %# '
 setopt HIST_IGNORE_ALL_DUPS   # Removes older duplicate entries from history
 setopt HIST_IGNORE_SPACE      # Ignores commands that start with a space
 
+# Enable autocomplete
+autoload -Uz compinit && compinit
+
 alias ls='ls -G'   # Add color to ls
 alias ll='ls -l'
 alias la='ls -A'
