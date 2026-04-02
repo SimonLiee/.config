@@ -14,6 +14,8 @@ PROMPT='%B%F{27}%1~%f%b %# '
 setopt HIST_IGNORE_ALL_DUPS   # Removes older duplicate entries from history
 setopt HIST_IGNORE_SPACE      # Ignores commands that start with a space
 
+export EDITOR='nvim'
+
 # Enable autocomplete
 autoload -Uz compinit && compinit
 
@@ -40,3 +42,4 @@ function preexec() {
 source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 ZVM_VI_SURROUND_BINDKEY=s-prefix
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
