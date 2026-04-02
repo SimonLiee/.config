@@ -23,3 +23,8 @@ alias gpl='git pull'
 alias gp='git push'
 
 alias e='exit'
+
+function preexec() {
+  local cmd=${1%% *}   # strip args
+  tmux rename-window " $cmd"
+}
