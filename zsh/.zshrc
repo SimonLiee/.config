@@ -26,5 +26,5 @@ alias e='exit'
 
 function preexec() {
   local cmd=${1%% *}   # strip args
-  tmux rename-window " $cmd"
+  tmux rename-window "$cmd"
 }
