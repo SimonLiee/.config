@@ -9,32 +9,25 @@
 -- Use this file to install and configure other such plugins.
 
 -- Helper Functions ================================================================
--- Make concise helpers for installing/adding plugins in two stages.
--- Add some plugins now if Neovim is started like `nvim -- some-file` because
--- they are needed during startup to work correctly.
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-local now_if_args = vim.fn.argc(-1) > 0 and now or later
+local add = vim.pack.add
+local now, later = Config.now, Config.later
+local now_if_args = Config.now_if_args
 
 -- Tree-sitter ================================================================
 now(function()
+  -- Define hook to update tree-sitter parsers after plugin is updated
+  local ts_update = function() vim.cmd('TSUpdate') end
+  Config.on_packchanged('nvim-treesitter', { 'update' }, ts_update, ':TSUpdate')
+
   add({
-    source = 'nvim-treesitter/nvim-treesitter',
-    -- Use `main` branch since `master` branch is frozen, yet still default
-    checkout = 'main',
-    -- Update tree-sitter parser after plugin is updated
-    hooks = {
-      post_checkout = function() vim.cmd('TSUpdate') end,
-    },
-  })
-  add({
-    source = 'nvim-treesitter/nvim-treesitter-textobjects',
-    -- Same logic as for 'nvim-treesitter'
-    checkout = 'main',
+    'https://github.com/nvim-treesitter/nvim-treesitter',
+    'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
   })
 
   -- Ensure installed parsers for listed languages. Add to `languages`
   -- array languages which you want to have installed. To see available languages:
-  --   https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
+  --   https://github.com/nvim-treesitter/nvim-treesitter/blob/main
+  --     /SUPPORTED_LANGUAGES.md
   local languages = {
     'lua',
     'vimdoc',
@@ -71,7 +64,7 @@ end)
 -- Language servers ===========================================================
 
 now_if_args(function()
-  add('neovim/nvim-lspconfig')
+  add({ 'https://github.com/neovim/nvim-lspconfig' })
 
   vim.lsp.enable({
     'ts_ls',
@@ -89,7 +82,7 @@ end)
 -- The 'stevearc/conform.nvim' plugin is a good and maintained solution for easier
 -- formatting setup.
 later(function()
-  add('stevearc/conform.nvim')
+  add({ 'https://github.com/stevearc/conform.nvim' })
 
   -- See also:
   -- - `:h Conform`
@@ -120,21 +113,21 @@ end)
 -- snippet files. They are organized in 'snippets/' directory (mostly) per language.
 -- 'mini.snippets' is designed to work with it as seamlessly as possible.
 -- See `:h MiniSnippets.gen_loader.from_lang()`.
-later(function() add('rafamadriz/friendly-snippets') end)
+later(function() add({ 'https://github.com/rafamadriz/friendly-snippets' }) end)
 
 now(function()
-  add({ source = 'catppuccin/nvim', name = 'catppuccin' })
+  add({ { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' } })
   vim.cmd('colorscheme catppuccin-mocha')
 end)
 
 -- Autoclose html and tsx tags
 later(function()
-  add('windwp/nvim-ts-autotag')
+  add({ 'https://github.com/windwp/nvim-ts-autotag' })
   require('nvim-ts-autotag').setup()
 end)
 
 later(function()
-  add('windwp/nvim-autopairs')
+  add({ 'https://github.com/windwp/nvim-autopairs' })
   require('nvim-autopairs').setup({
     ignored_next_char = '[^%s\n]', -- will ignore alphanumeric and `.` symbol
   })
@@ -142,7 +135,7 @@ end)
 
 -- Nvim-tmux-navigation: Seamless navigation between tmux and neovim
 later(function()
-  add('alexghergh/nvim-tmux-navigation')
+  add({ 'https://github.com/alexghergh/nvim-tmux-navigation' })
   require('nvim-tmux-navigation').setup({
     keybindings = {
       left = '<C-h>',

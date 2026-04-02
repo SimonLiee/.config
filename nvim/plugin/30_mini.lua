@@ -5,7 +5,7 @@
 -- To minimize the time until first screen draw, modules are enabled in two steps:
 -- - Step one enables everything that is needed for first draw with `now()`.
 -- - Everything else is delayed until the first draw with `later()`.
-local now, later = MiniDeps.now, MiniDeps.later
+local now, later = Config.now, Config.later
 
 -- Common configuration presets. Example usage:
 -- - `<C-s>` in Insert mode - save and go to Normal mode
@@ -353,8 +353,8 @@ later(function()
   -- - `g?` to see available bookmarks
   local add_marks = function()
     MiniFiles.set_bookmark('c', vim.fn.stdpath('config'), { desc = 'Config' })
-    local minideps_plugins = vim.fn.stdpath('data') .. '/site/pack/deps/opt'
-    MiniFiles.set_bookmark('p', minideps_plugins, { desc = 'Plugins' })
+    local vimpack_plugins = vim.fn.stdpath('data') .. '/site/pack/core/opt'
+    MiniFiles.set_bookmark('p', vimpack_plugins, { desc = 'Plugins' })
     MiniFiles.set_bookmark('w', vim.fn.getcwd, { desc = 'Working directory' })
   end
   _G.Config.new_autocmd('User', 'MiniFilesExplorerOpen', add_marks, 'Add bookmarks')
